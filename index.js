@@ -7,7 +7,6 @@ const app = express();
 
 app.use(cors());
 
-// Serve a different HTML file for the root page
 app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, 'index.html'));
 });
@@ -19,11 +18,10 @@ app.get('/script.js', (req, res) => {
   res.sendFile(path.join(__dirname, 'script.js'));
 });
 
-// Proxy middleware for all other routes
 app.use(createProxyMiddleware('/', {
   target: 'https://now.gg',
   changeOrigin: true,
-  secure: false, // Bypass SSL/TLS verification
+  secure: false, // Bypass SSL Verification if needed
 }));
 
 const port = 80;
